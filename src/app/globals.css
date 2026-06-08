@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------
+   BitcoinTree — Design Tokens
+   "Paper, ink, and a single coal of warmth."
+   Never pure white / pure black — both feel clinical, neither feels grown.
+   ---------------------------------------------------------------------- */
+@theme inline {
+  --color-paper: #faf9f6;       /* base field — unbleached paper */
+  --color-paper-dim: #f1efe9;   /* recessed panels, section seams */
+  --color-ink: #0d0d0c;         /* primary type / linework */
+  --color-ink-soft: #3a3a37;    /* secondary type, captions */
+  --color-ink-faint: #8a8a84;   /* tertiary / metadata / timestamps */
+  --color-ember: #f7931a;       /* Bitcoin orange — used like a flame, sparingly */
+  --color-ember-dim: #d97f12;   /* pressed / deepened ember */
+  --color-ash: #b9b6ad;         /* Act IV decay — desaturated mid-tone */
+  --color-ash-dark: #6b6a64;    /* Act IV decay — desaturated shadow */
+  --color-line: rgba(13, 13, 12, 0.1);
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+
+  --ease-grow: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-prose: 38rem;
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: auto; /* GSAP/Lenis own scroll behavior */
+  }
+
+  body {
+    @apply bg-paper text-ink;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-ember) 22%, transparent);
+  }
+
+  /* Tabular numerals for anything "measured" — balances, addresses, dates */
+  .num-tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+}
+
+@layer utilities {
+  .font-serif-display {
+    font-family: var(--font-serif), Georgia, serif;
+  }
+
+  .font-grotesk {
+    font-family: var(--font-sans), -apple-system, sans-serif;
+  }
+
+  /* Subtle film-grain overlay — one global texture rather than per-image noise */
+  .film-grain {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .film-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .measure-prose {
+    max-width: var(--container-prose);
+  }
+
+  /* Soft radial vignette used to focus attention toward frame center */
+  .vignette {
+    position: relative;
+  }
+
+  .vignette::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 45%,
+      color-mix(in srgb, var(--color-paper) 70%, transparent) 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

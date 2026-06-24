@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useScrollScene } from "@/lib/scroll/useScrollScene";
 import { Narration } from "@/components/ui/Narration";
+import { Wordmark } from "@/components/ui/Wordmark";
 import { NARRATION } from "@/content/narration";
 import { useActAudio } from "@/hooks/useActAudio";
 import { useSound } from "@/lib/sound/SoundProvider";
@@ -43,11 +44,13 @@ export function SceneBitcoin() {
       const facets = root.querySelectorAll<SVGLineElement>(".btc-facet");
       const glyph = root.querySelectorAll<SVGPathElement>(".btc-glyph");
       const canopyArc = root.querySelector<SVGPathElement>(".btc-canopy-arc");
-      const label = root.querySelector<HTMLElement>(".btc-label");
+      const wordmark = root.querySelector<HTMLElement>(".btc-wordmark");
 
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0.08);
-        tl.to(label, { opacity: 0, duration: 0.1 }, 0.88);
+      // As the central mark resolves on "This is the seed of BitcoinTree.",
+      // the name ghost-embosses beneath the seal — the brand owned at the turn.
+      if (wordmark) {
+        tl.fromTo(wordmark, { opacity: 0 }, { opacity: 0.14, duration: 0.1, ease: "power1.out" }, 0.8);
+        tl.to(wordmark, { opacity: 0, duration: 0.1, ease: "power1.in" }, 0.94);
       }
 
       // The frame exhales — cool grey gives way to warm paper and a glow
@@ -91,10 +94,6 @@ export function SceneBitcoin() {
       className="film-grain relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act V: Bitcoin"
     >
-      <span className="btc-label font-grotesk absolute top-[10%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-faint uppercase opacity-0">
-        Act V — Bitcoin
-      </span>
-
       {/* residual cool wash from Act IV, fading as warmth returns */}
       <div
         className="btc-warm-wash pointer-events-none absolute inset-0 z-10"
@@ -138,6 +137,11 @@ export function SceneBitcoin() {
           {/* canopy arc — the ring's continuation into Act VI's tree */}
           <path className="btc-canopy-arc" d="M40 120 C 60 60, 140 60, 160 120" stroke="#0d0d0c" strokeWidth="2" fill="none" opacity="0" />
         </svg>
+      </div>
+
+      {/* the name, ghost-embossed beneath the resolved seal at the turn */}
+      <div className="btc-wordmark pointer-events-none absolute top-[64%] left-1/2 z-10 -translate-x-1/2 opacity-0">
+        <Wordmark variant="display" play={false} className="text-[clamp(1.5rem,4vw,2.6rem)]" />
       </div>
 
       <div className="absolute inset-x-0 bottom-[10%] z-20 flex justify-center px-6">

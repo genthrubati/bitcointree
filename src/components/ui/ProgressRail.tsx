@@ -27,11 +27,29 @@ export function ProgressRail() {
           style={{ height: `${Math.min(progress, 1) * 100}%` }}
         />
       </div>
-      <span className="font-grotesk num-tabular text-[10px] tracking-[0.2em] text-ink-faint">
-        {String(Math.min(Math.round(progress * ACT_COUNT) , ACT_COUNT)).padStart(2, "0")}
-        <span className="mx-px text-ink-faint/50">/</span>
-        {String(ACT_COUNT).padStart(2, "0")}
-      </span>
+
+      {/* Growth rings — one quarter-arc completes as each act passes, so the
+          rail reads as "a thing accruing slowly" rather than "slide N of 7". */}
+      <svg viewBox="0 0 40 40" className="h-9 w-9 overflow-visible" aria-hidden>
+        {Array.from({ length: ACT_COUNT }).map((_, i) => {
+          const r = 4 + i * 2.5;
+          const cx = 6;
+          const cy = 34;
+          const d = `M ${cx} ${cy - r} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
+          const reached = progress * ACT_COUNT >= i + 1;
+          return (
+            <path
+              key={i}
+              d={d}
+              fill="none"
+              stroke={reached ? "var(--color-ember)" : "rgba(13,13,12,0.16)"}
+              strokeOpacity={reached ? 0.7 : 1}
+              strokeWidth={1}
+              strokeLinecap="round"
+            />
+          );
+        })}
+      </svg>
     </div>
   );
 }

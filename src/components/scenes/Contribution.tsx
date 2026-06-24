@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { BalanceReadout } from "@/components/bitcoin/BalanceReadout";
 import { BitcoinAddress } from "@/components/bitcoin/BitcoinAddress";
 import { QRCode } from "@/components/bitcoin/QRCode";
+import { Wordmark } from "@/components/ui/Wordmark";
 import { SITE } from "@/content/site";
 
 const reveal = {
@@ -37,10 +38,15 @@ export function Contribution() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-md"
         >
-          <p className="font-grotesk text-[11px] tracking-[0.25em] text-ink-faint uppercase">
-            BitcoinTree
+          <Wordmark
+            variant="display"
+            play={false}
+            className="letterpress-press text-[clamp(2rem,5vw,3.2rem)]"
+          />
+          <p className="font-serif-display measure-prose mt-5 text-base leading-relaxed text-ink-soft italic">
+            A promise that cannot be broken, planted in public, growing for everyone.
           </p>
-          <h2 className="font-serif-display text-balance mt-4 text-3xl leading-[1.25] font-light text-ink sm:text-4xl">
+          <h2 className="font-serif-display text-balance mt-6 text-3xl leading-[1.25] font-light text-ink sm:text-4xl">
             This isn&apos;t a fundraiser. It&apos;s a place this is actually growing — in public, on a ledger anyone can read, for as long as it takes.
           </h2>
           <p className="font-serif-display measure-prose mt-6 text-base leading-relaxed text-ink-soft italic">

@@ -85,6 +85,18 @@
     text-wrap: balance;
   }
 
+  /* The wordmark, set "carved": tight tracking + a barely-there letterpress
+     lift so the name reads as physically placed on the paper, not typed on. */
+  .wordmark-track {
+    letter-spacing: -0.012em;
+  }
+
+  .letterpress-press {
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.4),
+      0 18px 44px rgba(13, 13, 12, 0.12);
+  }
+
   .measure-prose {
     max-width: var(--container-prose);
   }

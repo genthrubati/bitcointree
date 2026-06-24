@@ -80,7 +80,7 @@ export function BalanceReadout({ className }: { className?: string }) {
 
       {status === "ready" && txCount !== null && (
         <p className="num-tabular mt-1 text-xs text-ink-faint">
-          {txCount.toLocaleString("en-US")} contributions received, on-chain, since the planting
+          {txCount.toLocaleString("en-US")} promises kept, in public — like a tree, it keeps one ring for every season it survives
         </p>
       )}
       {status === "unavailable" && (

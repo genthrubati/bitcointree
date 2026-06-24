@@ -32,12 +32,6 @@ export function SceneSeed() {
       const vein = root.querySelector<SVGPathElement>(".seed-vein");
       const glow = root.querySelector<SVGElement>(".seed-glow");
       const shoot = root.querySelector<SVGPathElement>(".seed-shoot");
-      const label = root.querySelector<HTMLElement>(".seed-label");
-
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.18 }, 0);
-        tl.to(label, { opacity: 0, duration: 0.12 }, 0.85);
-      }
 
       // Slow 3D rotation — the camera turning the seed over in its hand
       if (stage) {
@@ -91,10 +85,6 @@ export function SceneSeed() {
       className="film-grain vignette relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act I: Seed"
     >
-      <span className="seed-label font-grotesk absolute top-[12%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-faint uppercase opacity-0">
-        Act I — Seed
-      </span>
-
       <div className="seed-stage" style={{ perspective: "900px", transformStyle: "preserve-3d" }}>
         <svg
           className="h-[clamp(220px,38vw,420px)] w-[clamp(220px,38vw,420px)]"

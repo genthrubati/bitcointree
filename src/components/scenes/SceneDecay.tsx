@@ -43,13 +43,7 @@ export function SceneDecay() {
       const wash = root.querySelector<HTMLElement>(".decay-wash");
       const ticks = root.querySelectorAll<HTMLElement>(".decay-tick");
       const ember = root.querySelector<HTMLElement>(".decay-ember");
-      const label = root.querySelector<HTMLElement>(".decay-label");
       const holdCard = root.querySelector<HTMLElement>(".decay-hold");
-
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 0.7, duration: 0.08 }, 0);
-        tl.to(label, { opacity: 0, duration: 0.06 }, 0.9);
-      }
 
       // Continuous, slightly-accelerating erosion — like erosion itself
       if (column) {
@@ -95,10 +89,6 @@ export function SceneDecay() {
       className="film-grain relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act IV: Monetary Decay"
     >
-      <span className="decay-label font-grotesk absolute top-[10%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-soft uppercase opacity-0">
-        Act IV — Monetary Decay
-      </span>
-
       {/* Desaturating wash over the whole frame */}
       <div
         className="decay-wash pointer-events-none absolute inset-0 z-10 opacity-0"

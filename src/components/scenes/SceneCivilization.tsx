@@ -55,12 +55,6 @@ export function SceneCivilization() {
       const links = root.querySelectorAll<SVGLineElement>(".civ-link");
       const wash = root.querySelector<HTMLElement>(".civ-desaturate");
       const figures = root.querySelectorAll<SVGElement>(".civ-figure");
-      const label = root.querySelector<HTMLElement>(".civ-label");
-
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0);
-        tl.to(label, { opacity: 0, duration: 0.1 }, 0.9);
-      }
 
       skyline.forEach((b, i) => {
         tl.fromTo(b, { opacity: 0, y: 14 }, { opacity: 0.5, y: 0, duration: 0.18, ease: "power1.out" }, 0.02 * i);
@@ -99,7 +93,9 @@ export function SceneCivilization() {
       // The break — one promise fails, right at the experience's brightest point
       const breakLink = links[BREAK_LINK_INDEX];
       if (breakLink) {
-        tl.to(breakLink, { opacity: 0.9, duration: 0.02 }, 0.78);
+        // the one promise that fails flares warm for an instant — the only
+        // ember in this act — then goes out
+        tl.to(breakLink, { opacity: 0.95, stroke: "#f7931a", duration: 0.02 }, 0.78);
         tl.to(breakLink, { opacity: 0.05, duration: 0.02 }, 0.8);
         tl.to(breakLink, { opacity: 0.7, duration: 0.015 }, 0.815);
         tl.to(breakLink, { opacity: 0, strokeDashoffset: -20, duration: 0.05 }, 0.83);
@@ -118,11 +114,7 @@ export function SceneCivilization() {
       className="film-grain relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act III: Civilization"
     >
-      <span className="civ-label font-grotesk absolute top-[10%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-faint uppercase opacity-0">
-        Act III — Civilization
-      </span>
-
-      <svg className="h-[min(80vh,620px)] w-auto" viewBox="0 40 480 280" fill="none" aria-hidden>
+      <svg className="h-[min(80vh,620px)] w-auto max-w-[94vw]" viewBox="0 40 480 280" fill="none" aria-hidden>
         {/* skyline — engraved line-art, restrained and universal */}
         {BUILDINGS.map((d, i) => (
           <path key={`b-${i}`} className="civ-building" d={d} stroke="#0d0d0c" strokeOpacity="0.32" strokeWidth="1.4" fill="none" />
@@ -146,7 +138,7 @@ export function SceneCivilization() {
               className="civ-link"
               x1={NODES[a].x} y1={NODES[a].y}
               x2={NODES[b].x} y2={NODES[b].y}
-              stroke="#f7931a" strokeWidth="1"
+              stroke="#3a3a37" strokeWidth="1"
             />
           ))}
           {NODES.map((n, i) => (

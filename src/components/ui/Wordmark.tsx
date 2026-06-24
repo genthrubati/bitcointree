@@ -32,34 +32,34 @@ function PromiseGlyphT({ strokeScale = 1 }: { strokeScale?: number }) {
       aria-hidden
       style={{
         display: "inline-block",
-        height: "0.96em",
-        width: "0.46em",
-        verticalAlign: "-0.2em",
-        margin: "0 0.02em",
+        height: "0.98em",
+        width: "0.5em",
+        verticalAlign: "-0.17em",
+        margin: "0 0.015em",
         overflow: "visible",
       }}
     >
       {/* taproot stem — the single ember coal in the name */}
       <path
-        d="M28 4 V128"
+        d="M28 10 V128"
         stroke="var(--color-ember)"
         strokeWidth={9 * strokeScale}
         strokeLinecap="round"
       />
-      {/* the crossbar (reads as a T) */}
+      {/* the T crossbar — wide and at the very top so it reads clearly as a T */}
       <path
-        d="M6 18 H50"
+        d="M3 12 H53"
         stroke="currentColor"
         strokeWidth={9 * strokeScale}
         strokeLinecap="round"
       />
-      {/* a quieter second bar — the hint of a ₿, the seed/promise rhyme */}
+      {/* a quiet, short second bar — just a hint of a ₿, the seed/promise rhyme */}
       <path
-        d="M9 52 H43"
+        d="M14 46 H40"
         stroke="currentColor"
-        strokeWidth={7 * strokeScale}
+        strokeWidth={6 * strokeScale}
         strokeLinecap="round"
-        opacity={0.85}
+        opacity={0.4}
       />
     </svg>
   );

@@ -67,12 +67,7 @@ export function SceneGrowth() {
       const leaves = root.querySelectorAll<SVGCircleElement>(".growth-leaf");
       const tips = root.querySelectorAll<SVGCircleElement>(".growth-root-tip");
       const horizon = root.querySelector<HTMLElement>(".growth-horizon");
-      const label = root.querySelector<HTMLElement>(".growth-label");
 
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.15 }, 0);
-        tl.to(label, { opacity: 0, duration: 0.1 }, 0.88);
-      }
       if (horizon) {
         tl.fromTo(horizon, { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power1.out" }, 0);
       }
@@ -114,12 +109,8 @@ export function SceneGrowth() {
       className="film-grain relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act II: Growth"
     >
-      <span className="growth-label font-grotesk absolute top-[10%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-faint uppercase opacity-0">
-        Act II — Growth
-      </span>
-
       <svg
-        className="h-[min(86vh,640px)] w-auto"
+        className="h-[min(86vh,640px)] w-auto max-w-[92vw]"
         viewBox="0 40 300 320"
         fill="none"
         aria-hidden
@@ -130,7 +121,7 @@ export function SceneGrowth() {
           <path key={`c-${i}`} className="growth-canopy-path" d={d} stroke="#0d0d0c" strokeOpacity="0.78" strokeWidth="2" strokeLinecap="round" fill="none" />
         ))}
         {LEAVES.map((leaf, i) => (
-          <circle key={`l-${i}`} className="growth-leaf" cx={leaf.x} cy={leaf.y} r={leaf.r} fill="#d97f12" fillOpacity="0.7" />
+          <circle key={`l-${i}`} className="growth-leaf" cx={leaf.x} cy={leaf.y} r={leaf.r} fill="#3a3a37" fillOpacity="0.7" />
         ))}
 
         {ROOT_PATHS.map((d, i) => (

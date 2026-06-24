@@ -67,13 +67,8 @@ export function SceneTree() {
       const roots = root.querySelectorAll<SVGPathElement>(".tree-root-path");
       const leaves = root.querySelectorAll<SVGCircleElement>(".tree-leaf");
       const lights = root.querySelectorAll<SVGCircleElement>(".tree-root-light");
-      const label = root.querySelector<HTMLElement>(".tree-label");
       const ground = root.querySelector<HTMLElement>(".tree-ground");
 
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0);
-        tl.to(label, { opacity: 0, duration: 0.12 }, 0.92);
-      }
       if (ground) {
         tl.fromTo(ground, { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power1.out" }, 0);
       }
@@ -129,19 +124,15 @@ export function SceneTree() {
       className="film-grain relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act VII: The Tree"
     >
-      <span className="tree-label font-grotesk absolute top-[10%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-faint uppercase opacity-0">
-        Act VII — The Tree
-      </span>
-
       <div ref={treeWrapRef} className="relative">
-        <svg className="h-[min(82vh,680px)] w-auto" viewBox="0 30 300 330" fill="none" aria-hidden>
+        <svg className="h-[min(82vh,680px)] w-auto max-w-[92vw]" viewBox="0 30 300 330" fill="none" aria-hidden>
           <line className="tree-ground" x1="30" y1="210" x2="270" y2="210" stroke="#0d0d0c" strokeOpacity="0.12" strokeWidth="1" style={{ transformOrigin: "150px 210px" }} />
 
           {CANOPY_PATHS.map((d, i) => (
             <path key={`c-${i}`} className="tree-canopy-path" d={d} stroke="#0d0d0c" strokeOpacity="0.82" strokeWidth="2.2" strokeLinecap="round" fill="none" />
           ))}
           {CANOPY_LEAVES.map((leaf, i) => (
-            <circle key={`l-${i}`} className="tree-leaf" cx={leaf.x} cy={leaf.y} r="3.6" fill="#d97f12" fillOpacity="0.7" />
+            <circle key={`l-${i}`} className="tree-leaf" cx={leaf.x} cy={leaf.y} r="3.6" fill="#3a3a37" fillOpacity="0.7" />
           ))}
 
           {ROOT_PATHS.map((d, i) => (

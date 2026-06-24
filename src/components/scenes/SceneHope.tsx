@@ -46,16 +46,18 @@ const SAPLINGS: Sapling[] = [
 
 const CHOSEN_INDEX = 7;
 
-function SaplingGlyph({ color }: { color: string }) {
+function SaplingGlyph({ color, ember = false }: { color: string; ember?: boolean }) {
+  // Only the chosen sapling carries the ember bud — the single coal in this
+  // field. Every other tip is ink, so the one warmth stays precious.
   return (
     <svg viewBox="0 0 60 90" className="h-full w-full overflow-visible" fill="none" aria-hidden>
       <path d="M30 90 V52" stroke={color} strokeWidth="2.4" strokeLinecap="round" />
       <path d="M30 64 C 18 58, 12 50, 8 38" stroke={color} strokeWidth="1.8" strokeLinecap="round" fill="none" />
       <path d="M30 60 C 42 54, 48 46, 52 34" stroke={color} strokeWidth="1.8" strokeLinecap="round" fill="none" />
       <path d="M30 52 C 30 38, 30 26, 30 14" stroke={color} strokeWidth="1.8" strokeLinecap="round" fill="none" />
-      <circle cx="30" cy="14" r="4.5" fill="#f7931a" fillOpacity="0.65" />
-      <circle cx="8" cy="38" r="3" fill="#f7931a" fillOpacity="0.45" />
-      <circle cx="52" cy="34" r="3" fill="#f7931a" fillOpacity="0.45" />
+      <circle cx="30" cy="14" r="4.5" fill={ember ? "#f7931a" : color} fillOpacity={ember ? 0.7 : 0.5} />
+      <circle cx="8" cy="38" r="3" fill={color} fillOpacity="0.35" />
+      <circle cx="52" cy="34" r="3" fill={color} fillOpacity="0.35" />
     </svg>
   );
 }
@@ -71,14 +73,8 @@ export function SceneHope() {
       const field = root.querySelector<HTMLElement>(".hope-field");
       const saplings = root.querySelectorAll<HTMLElement>(".hope-sapling");
       const wash = root.querySelector<HTMLElement>(".hope-warm-wash");
-      const label = root.querySelector<HTMLElement>(".hope-label");
       const chosen = root.querySelector<HTMLElement>(`[data-sapling="${CHOSEN_INDEX}"]`);
       const others = root.querySelectorAll<HTMLElement>(`.hope-sapling:not([data-sapling="${CHOSEN_INDEX}"])`);
-
-      if (label) {
-        tl.fromTo(label, { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0);
-        tl.to(label, { opacity: 0, duration: 0.1 }, 0.85);
-      }
 
       if (wash) {
         tl.fromTo(wash, { opacity: 0 }, { opacity: 0.5, duration: 0.5, ease: "power1.out" }, 0);
@@ -117,10 +113,6 @@ export function SceneHope() {
       className="film-grain relative flex h-screen w-full items-center justify-center overflow-hidden bg-paper"
       aria-label="Act VI: Hope"
     >
-      <span className="hope-label font-grotesk absolute top-[10%] left-1/2 -translate-x-1/2 text-[11px] tracking-[0.3em] text-ink-faint uppercase opacity-0">
-        Act VI — Hope
-      </span>
-
       <div
         className="hope-warm-wash pointer-events-none absolute inset-0 z-0 opacity-0"
         style={{
@@ -142,7 +134,7 @@ export function SceneHope() {
               transform: `translateX(-50%)`,
             }}
           >
-            <SaplingGlyph color={DEPTH_STYLE[s.depth].color} />
+            <SaplingGlyph color={DEPTH_STYLE[s.depth].color} ember={i === CHOSEN_INDEX} />
           </div>
         ))}
 
